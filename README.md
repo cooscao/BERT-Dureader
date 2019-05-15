@@ -39,3 +39,8 @@ $ cd retriever
 $ python prepare.py
 $ python run_classifier.py --data_dir ./retriever_data/ --bert_model ../data/chinese_L-12_H-768_A-12/ --task_name MRPC --output_dir ./retriever_output --do_train --do_eval --train_batch_size 8
 ```
+训练完成之后模型保存在文件夹 **./retriever_output** 中,接下来使用训练好的模型，对test测试集筛查选择相关的备选文档
+```bash
+$ python bert_rank.py --test_file ../data/test1_preprocessed/test1set/zhidao.test1.json --output_path ../zhidao_test_rank_output.json
+$ python bert_rank.py --test_file ../data/test1_preprocessed/test1set/search.test1.json --output_path ../search_test_rank_output.json
+```
