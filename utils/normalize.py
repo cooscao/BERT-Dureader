@@ -20,3 +20,25 @@ def filter_tags(htmlstr):
     s = s.replace(' ', '').replace(u'\u3000', '').replace('&nbsp', '').replace('\n', '')
     # s=replaceCharEntity(s)#替换实体
     return s
+
+
+def convert_to_squad(datas):
+    data_sets = {}
+    data_sets['version'] = '1.1'
+    data_sets['data'] = []
+    for data in datas:
+        sample = {}
+        sample['title'] = data['question_text']
+        sample['id'] = data['qas_id']
+        para_dict = {}
+        para_dict['context'] = data['doc']
+        para_dict['id'] = str(data['qas_id']) + '-1'
+        qas_dict = {}
+        qas_dict['id'] = para_dict['id'] + '-1'
+        qas_dict['question'] = data['question_text']
+        qas_dict['answers'] = [{"id":"1", "text": '', 
+                               "answer_start": 0}]
+        para_dict['qas'] = [qas_dict]
+        sample['paragraphs'] = [para_dict]
+        data_sets['data'].append(sample)
+    return data_sets

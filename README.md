@@ -44,3 +44,17 @@ $ python run_classifier.py --data_dir ./retriever_data/ --bert_model ../data/chi
 $ python bert_rank.py --test_file ../data/test1_preprocessed/test1set/zhidao.test1.json --output_path ../zhidao_test_rank_output.json
 $ python bert_rank.py --test_file ../data/test1_preprocessed/test1set/search.test1.json --output_path ../search_test_rank_output.json
 ```
+
+## 使用BERT训练抽取模型
+先将训练集进行预处理转化为squad格式，再通过run_dureader.py对bert模型进行微调,模型结果保存在reader_output中
+```bash
+$ cd reader
+$ python prepare_squad.py
+$ python run_dureader.py --bert_model ../data/chinese_L-12_H-768_A_12 --do_train --train_file ./dureader_train.json --train_batch_size 12 --learning_rate 3e-5 --num_train_epochs 3.0 --max_seq_length 384 --doc_stride 128 --output_dir ./reader_output
+```
+
+## 结合检索和抽取对测试集进行预测
+```
+$ python prepare_test.py
+$ python predict_dureader.py --bert_model ./data/chinese_L-12_H-768_A_12/ --bin_path ./reader/reader_output/pytorch_model.bin --predict_file ./dureader_test.json --output ./test1_output
+```
