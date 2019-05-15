@@ -6,8 +6,12 @@ import os
 import json
 import numpy as np
 import re
+import argparse
 import torch.nn.functional as F
 from tqdm import tqdm
 from collections import defaultdict
 from pytorch_pretrained_bert import BertForSequenceClassification, BertConfig, BertTokenizer
 from run_classifier import InputExample, InputFeatures, convert_examples_to_features
+
+parser = argparse.ArgumentParser('Bert Ranker')
+parser.add_argument()
