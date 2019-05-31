@@ -1,5 +1,5 @@
 # BERT-Dureader
-[lic2019](http://lic2019.ccf.org.cn/read)Dureader 2.0比赛BERT实现, 最终分数在test1测试集上为Rouge-L: 49.48, Bleu-4: 51.43.主要依赖为:
+[lic2019](http://lic2019.ccf.org.cn/read)Dureader 2.0比赛BERT实现, 最终分数为Rouge-L: 49.82, Bleu-4: 51.9,排名第16.主要依赖为:
 ```
 python==3.6
 torch==0.4.1
@@ -58,3 +58,6 @@ $ python run_dureader.py --bert_model ../data/chinese_L-12_H-768_A_12 --do_train
 $ python prepare_test.py
 $ python predict_dureader.py --bert_model ./data/chinese_L-12_H-768_A_12/ --bin_path ./reader/reader_output/pytorch_model.bin --predict_file ./dureader_test.json --output ./test1_output
 ```
+
+## yes_no三分类
+对于附加的yes_no_depends三分类实验，也只需要从train_set中准备一个分类训练集，使用pytorch_pretrained_bert的run_classifier.py进行三分类即可。最终我得到的结果为acc:0.7左右，加上之后对总成绩大约有0.4个点的提升，代码就不放在这里了。
